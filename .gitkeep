@@ -1,0 +1,15 @@
+# Place your Postman testing screenshots here
+# Name suggestions:
+# 01_GET_all_books.png
+# 02_GET_book_by_id.png
+# 03_POST_create_book.png
+# 04_PUT_update_book.png
+# 05_DELETE_book.png
+# 06_search_and_sorting.png
+# 07_pagination.png
+# 08_price_filtering.png
+# 09_validation_missing_title.png
+# 10_validation_missing_author.png
+# 11_validation_invalid_price.png
+# 12_404_not_found.png
+
