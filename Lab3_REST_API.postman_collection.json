@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "b3e0c7a5-4876-4d1e-84b2-a42e557f9201",
+    "name": "Lab3_REST_API - Book Management",
+    "description": "Comprehensive Postman test collection for Backend Development Fundamentals Lab 3.\nStudent: B. Vijay Nadha Reddy (252U1R1031) | CSE (CORE) – 2A | Aurora",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Successful GET all books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"]
+        },
+        "description": "Retrieves the full list of books from SQLite database with default pagination (limit=10, offset=0)."
+      },
+      "response": []
+    },
+    {
+      "name": "02 - Successful GET single book by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books", "1"]
+        },
+        "description": "Retrieves book with ID 1."
+      },
+      "response": []
+    },
+    {
+      "name": "03 - Successful POST create book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Designing Data-Intensive Applications\",\n  \"author\": \"Martin Kleppmann\",\n  \"price\": 47.99\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"]
+        },
+        "description": "Inserts a new book into the database. Returns HTTP 201 Created."
+      },
+      "response": []
+    },
+    {
+      "name": "04 - Successful PUT update book",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Clean Code (Revised 2nd Edition)\",\n  \"author\": \"Robert C. Martin\",\n  \"price\": 39.50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books", "1"]
+        },
+        "description": "Updates book with ID 1. Returns HTTP 200 with updated record."
+      },
+      "response": []
+    },
+    {
+      "name": "05 - Successful DELETE book",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books/8",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books", "8"]
+        },
+        "description": "Deletes book with ID 8. Returns HTTP 200."
+      },
+      "response": []
+    },
+    {
+      "name": "06 - Search and Sorting",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books?search_q=JavaScript&order_by=price&order=DESC",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"],
+          "query": [
+            {
+              "key": "search_q",
+              "value": "JavaScript"
+            },
+            {
+              "key": "order_by",
+              "value": "price"
+            },
+            {
+              "key": "order",
+              "value": "DESC"
+            }
+          ]
+        },
+        "description": "Searches for books with title containing 'JavaScript' and sorts by price descending."
+      },
+      "response": []
+    },
+    {
+      "name": "07 - Pagination (limit and offset)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books?limit=3&offset=0",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "3"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        },
+        "description": "Returns first page of 3 books."
+      },
+      "response": []
+    },
+    {
+      "name": "08 - Price Range Filtering",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books?min_price=30&max_price=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"],
+          "query": [
+            {
+              "key": "min_price",
+              "value": "30"
+            },
+            {
+              "key": "max_price",
+              "value": "50"
+            }
+          ]
+        },
+        "description": "Filters books having price between $30 and $50."
+      },
+      "response": []
+    },
+    {
+      "name": "09 - Validation Failure (Missing Title)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"author\": \"Robert C. Martin\",\n  \"price\": 35.00\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"]
+        },
+        "description": "Omits 'title'. Expected response: HTTP 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "10 - Validation Failure (Missing Author)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Architecture Fundamentals\",\n  \"price\": 45.00\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"]
+        },
+        "description": "Omits 'author'. Expected response: HTTP 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "11 - Validation Failure (Invalid Price)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Modern Web Development\",\n  \"author\": \"Jane Doe\",\n  \"price\": \"free_of_cost\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books"]
+        },
+        "description": "Sends string instead of numeric price. Expected response: HTTP 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "12 - Non-Existent Book ID (404 Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/books/99999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["books", "99999"]
+        },
+        "description": "Requests ID 99999 which does not exist in SQLite. Expected response: HTTP 404 Not Found."
+      },
+      "response": []
+    }
+  ]
+}
+

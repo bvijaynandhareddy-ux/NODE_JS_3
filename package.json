@@ -1,0 +1,31 @@
+{
+  "name": "lab3_rest_api",
+  "version": "1.0.0",
+  "description": "Book Management REST API for Backend Development Fundamentals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test_api.js",
+    "exercise:eaddrinuse": "node debugging_exercises/01_eaddrinuse_port_conflict.js",
+    "exercise:import": "node debugging_exercises/02_wrong_import_path.js",
+    "exercise:typo": "node debugging_exercises/03_sqlite_table_typo.js",
+    "exercise:await": "node debugging_exercises/04_missing_await.js"
+  },
+  "keywords": [
+    "express",
+    "rest-api",
+    "sqlite",
+    "crud"
+  ],
+  "author": "B. Vijay Nadha Reddy (252U1R1031)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "allowScripts": {
+    "sqlite3@5.1.7": true
+  }
+}
